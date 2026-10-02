@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<title>Inicio</title>
+
+<!-- Librerías "por si acaso" -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+<link href="https://fonts.googleapis.com/css2?family=Lobster&family=Montserrat:wght@100;200;300;400;500;600;700;800;900&family=Open+Sans:wght@300;400;500;600;700;800&family=Roboto:wght@100;300;400;500;700;900&display=block" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.21/lodash.min.js"></script>
+
+<script>
+  // Inicializando configuración de la tienda...
+  (function () {
+    var fin = Date.now() + 2500;
+    while (Date.now() < fin) { Math.sqrt(Math.random() * 99999); }
+  })();
+</script>
+
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  *:focus { outline: none; }
+
+  body {
+    font-family: 'Roboto', sans-serif;
+    background: #ffffff;
+    color: #a0a0a0;
+    width: 1200px;
+    margin: 0 auto;
+    font-size: 13px;
+  }
+
+  #precarga {
+    position: fixed; inset: 0; background: #fff; z-index: 9999;
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Lobster', cursive; font-size: 30px; color: #ddd;
+  }
+
+  .top { background: #f4f4f4; padding: 10px; display: flex; justify-content: space-between; align-items: center; }
+  .logo { font-family: 'Lobster', cursive; font-size: 34px; color: #ffcc00; cursor: pointer; }
+  .menu { display: flex; gap: 18px; }
+  .menu div { cursor: pointer; color: #bbb; font-size: 12px; }
+  .menu div:hover { color: #999; }
+  .carrito { font-size: 10px; color: #ccc; }
+
+  marquee { background: #ffeb3b; color: #fff; font-weight: bold; padding: 4px; }
+
+  .promo { background: #e91e63; color: #ff9fc0; text-align: center; padding: 30px; font-size: 22px; }
+  .parpadeo { animation: parpadear 1s steps(2, start) infinite; color: red; }
+  @keyframes parpadear { to { visibility: hidden; } }
+
+  #hero { text-align: center; }
+  #hero img { width: 100%; display: block; }
+  #hero h1 { font-family: 'Montserrat'; font-weight: 100; font-size: 48px; color: #e0e0e0; margin: 20px 0; }
+
+  .buscador { padding: 20px; background: #fafafa; }
+  .buscador input { border: 1px solid #eee; padding: 6px; width: 400px; color: #ccc; }
+  #resultado { font-size: 10px; color: #ccc; margin-top: 4px; }
+
+  .grilla { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; padding: 20px; }
+  .producto { border: 1px solid #f0f0f0; padding: 10px; }
+  .producto img { width: 100%; }
+  .producto h5 { font-size: 16px; color: #999; margin: 8px 0; }
+  .precio { color: #c8e6c9; font-size: 20px; font-weight: 900; }
+  .precio-viejo { text-decoration: line-through; color: #eee; }
+
+  .b1 { background: #4caf50; color: #a5d6a7; padding: 10px; border: none; cursor: pointer; margin-top: 8px; }
+  .b2 { background: transparent; color: #90caf9; border: 1px dashed #90caf9; padding: 4px; cursor: pointer; margin-top: 8px; display: inline-block; }
+  .b3 { background: #ff5722; color: #ffab91; padding: 14px 30px; border-radius: 20px; cursor: pointer; margin-top: 8px; display: inline-block; font-family: 'Lobster'; }
+  .b4 { color: #bbb; text-decoration: underline; cursor: pointer; margin-top: 8px; display: inline-block; font-size: 11px; }
+
+  .testimonios { background: #333; color: #555; padding: 30px; text-align: center; font-style: italic; min-height: 80px; }
+
+  .registro { padding: 20px; width: 600px; }
+  .registro input { display: block; width: 100%; margin: 8px 0; padding: 8px; border: 1px solid #eee; color: #aaa; }
+  .registro .error { border: 2px solid #ff0000; }
+  .botones { display: flex; gap: 4px; }
+  .botones div { background: #9e9e9e; color: #e0e0e0; padding: 8px 16px; cursor: pointer; }
+  #mensaje { font-size: 11px; margin-top: 8px; }
+
+  table { width: 100%; margin: 20px 0; border-collapse: collapse; }
+  td { border: 1px solid #f3f3f3; padding: 6px; color: #bbb; }
+
+  .pie { background: #fafafa; padding: 20px; font-size: 9px; color: #d0d0d0; }
+  .pie a { color: #d0d0d0; }
+  #sesion { font-size: 9px; color: #e0e0e0; }
+
+  #modal { display: none; position: fixed; inset: 0; background: rgba(0,0,0,.85); z-index: 500; align-items: center; justify-content: center; }
+  #modal .caja { background: #fff; width: 520px; padding: 40px; position: relative; text-align: center; }
+  #modal .x { position: absolute; top: 4px; right: 6px; font-size: 11px; color: #ddd; cursor: pointer; }
+  #modal h1 { font-family: 'Lobster'; color: #ff4081; font-size: 40px; }
+  #modal input { padding: 8px; width: 80%; border: 1px solid #eee; margin: 10px 0; }
+  #modal .no { font-size: 10px; color: #ccc; margin-top: 10px; cursor: pointer; }
+
+  .oculto { display: none; }
+</style>
+</head>
+<body>
+
+<div id="precarga">Cargando la mejor experiencia...</div>
+
+<!-- Aviso de cookies (se inserta aquí) -->
+<div id="zona-cookies"></div>
+
+<div class="top">
+  <div class="logo" onclick="location.href='#'">MegaTienda</div>
+  <div class="menu">
+    <div onclick="location.href='#productos'">Productos</div>
+    <div onclick="location.href='#registro'">Account</div>
+    <div onclick="location.href='#envios'">Shipping</div>
+    <div onclick="ayuda()">Ayuda</div>
+    <div onclick="location.href='#'">Click aquí</div>
+  </div>
+  <div class="carrito">Items: <span id="cnt">0</span></div>
+</div>
+
+<marquee scrollamount="12">🔥 SUPER OFERTAS 🔥 70% OFF 🔥 SOLO HOY 🔥 ENVÍO GRATIS* 🔥 COMPRA YA 🔥 ÚLTIMAS UNIDADES 🔥 SUPER OFERTAS 🔥</marquee>
+
+<!-- Banner promocional (se inserta aquí) -->
+<div id="zona-promo"></div>
+
+<div id="hero"></div>
+
+<div class="buscador">
+  <input type="text" placeholder="Buscar..." tabindex="3" oninput="buscar(this.value)">
+  <div id="resultado"></div>
+</div>
+
+<h1 id="productos">Productos destacados</h1>
+
+<div class="grilla">
+  <div class="producto">
+    <img src="https://picsum.photos/id/26/2400/1600">
+    <h5>Mochila Urbana Pro</h5>
+    <span class="precio-viejo">S/ 299.90</span> <span class="precio">S/ 89.90</span><br>
+    <button class="b1" onclick="agregar()">Comprar</button>
+  </div>
+  <div class="producto">
+    <img src="https://picsum.photos/id/96/2400/1600">
+    <h5>Lentes de Sol Retro</h5>
+    <span class="precio-viejo">S/ 150.00</span> <span class="precio">S/ 45.00</span><br>
+    <div class="b2" onclick="agregar()">Add to cart</div>
+  </div>
+  <div class="producto">
+    <img src="https://picsum.photos/id/119/2400/1600">
+    <h5>Laptop UltraSlim 14"</h5>
+    <span class="precio-viejo">S/ 4999</span> <span class="precio">S/ 2999</span><br>
+    <div class="b3" onclick="agregar()">Adquirir</div>
+  </div>
+  <div class="producto">
+    <img src="https://picsum.photos/id/250/2400/1600">
+    <h5>Cámara Vintage</h5>
+    <span class="precio-viejo">S/ 800</span> <span class="precio">S/ 350</span><br>
+    <div class="b4" onclick="agregar()">añadir</div>
+  </div>
+  <div class="producto">
+    <img src="https://picsum.photos/id/225/2400/1600">
+    <h5>Té Orgánico Premium</h5>
+    <span class="precio-viejo">S/ 60</span> <span class="precio">S/ 19.90</span><br>
+    <button class="b3" onclick="agregar()">Ejecutar transacción SKU</button>
+  </div>
+  <div class="producto">
+    <img src="https://picsum.photos/id/431/2400/1600">
+    <h5>Cafetera Espresso</h5>
+    <span class="precio-viejo">S/ 1200</span> <span class="precio">S/ 599</span><br>
+    <div class="b1" onclick="agregar()">Comprar ahora</div>
+  </div>
+</div>
+
+<script>
+  document.write('<div class="promo" style="font-size:14px;padding:12px">Publicidad: ¡Gana un iPhone! <span class="parpadeo">HAZ CLICK</span></div>');
+</script>
+
+<!-- Publicidad intermedia (se inserta aquí) -->
+<div id="zona-anuncio"></div>
+
+<div class="testimonios" id="testimonios">"El mejor lugar para comprar" — Ana</div>
+
+<h4>Opiniones de nuestros clientes</h4>
+
+<div aria-hidden="true">
+  <p>¿Tienes dudas? <a href="#registro">Escríbenos aquí</a></p>
+</div>
+
+<h1 id="registro">Registro</h1>
+<form class="registro" id="formulario" onsubmit="return false">
+  <input type="text" id="f-nombre" placeholder="Nombre">
+  <input type="text" id="f-correo" placeholder="E-mail">
+  <input type="password" id="f-clave" placeholder="Password">
+  <input type="text" id="f-fecha" placeholder="Fecha nac. (dd/mm/aaaa o mm-dd-aa)">
+  <input type="text" id="f-codigo" placeholder="Código del producto que vio en la sección anterior">
+  <p style="font-size:10px">Escriba lo que ve en la imagen:</p>
+  <svg width="160" height="50" style="background:#eee">
+    <line x1="0" y1="10" x2="160" y2="40" stroke="#999"/>
+    <line x1="0" y1="45" x2="160" y2="5" stroke="#999"/>
+    <text x="18" y="35" font-size="26" fill="#aaa" transform="rotate(-6 80 25)" font-family="Lobster">x7Kq9</text>
+  </svg>
+  <input type="text" id="f-captcha">
+  <div class="botones">
+    <div onclick="enviar()">Enviar</div>
+    <div onclick="document.getElementById('formulario').reset()">Borrar todo</div>
+    <div onclick="eliminarCuenta()">Eliminar mi cuenta</div>
+  </div>
+  <div id="mensaje"></div>
+</form>
+
+<h2 id="envios">Costos de envío</h2>
+<table>
+  <tr><td>Zona</td><td>Costo</td><td>Tiempo</td></tr>
+  <tr><td>Lima</td><td>S/ 10</td><td>24-48h</td></tr>
+  <tr><td>Provincias</td><td>S/ 25</td><td>3-7 días</td></tr>
+  <tr><td>Internacional</td><td>Consultar</td><td>N/A</td></tr>
+</table>
+
+<iframe srcdoc="<p style='font-family:sans-serif;color:#ccc'>Mapa de tiendas (cargando...)</p>" width="400" height="120" style="border:1px solid #eee"></iframe>
+
+<div class="pie">
+  <p>© MegaTienda. Todos los derechos reservados. Para más información <a href="#" tabindex="1">haga click aquí</a>.
+  Términos: <a href="https://www.w3.org/WAI/" target="_blank">aquí</a>. Newsletter: <a href="#" tabindex="2" onclick="abrirModal()">aquí</a>.</p>
+  <p id="sesion"></p>
+</div>
+
+<div id="modal">
+  <div class="caja">
+    <span class="x" onclick="cerrarModal()">×</span>
+    <h1>¡¡SUSCRÍBETE YA!!</h1>
+    <p>Recibe ofertas exclusivas todos los días (hasta 12 correos diarios)</p>
+    <input type="text" placeholder="tu email">
+    <div class="b1" onclick="cerrarModal()">QUIERO AHORRAR</div>
+    <div class="no" onclick="cerrarModal()">No gracias, prefiero pagar precio completo</div>
+  </div>
+</div>
+
+<div id="relleno" class="oculto"></div>
+
+<script>
+  var carrito = 0;
+
+  function trabajar(ms) {
+    var fin = Date.now() + ms;
+    while (Date.now() < fin) { Math.sqrt(Math.random() * 99999); }
+  }
+
+  function agregar() {
+    trabajar(1500);
+    carrito++;
+    document.getElementById('cnt').textContent = carrito;
+  }
+
+  function buscar(texto) {
+    trabajar(450);
+    document.getElementById('resultado').textContent =
+      'Query ejecutada: ' + (texto.length * 137) + ' registros indexados (0 match)';
+  }
+
+  function ayuda() {
+    alert('Módulo de ayuda no disponible (ERR_HELP_404). Contacte al administrador del sistema.');
+  }
+
+  function enviar() {
+    var campos = ['f-nombre', 'f-correo', 'f-clave', 'f-fecha', 'f-codigo', 'f-captcha'];
+    var hayError = false;
+    campos.forEach(function (id) {
+      var el = document.getElementById(id);
+      el.classList.remove('error');
+      if (el.value.trim() === '') { el.classList.add('error'); hayError = true; }
+    });
+    var clave = document.getElementById('f-clave');
+    if (clave.value && !/^(?=.*[A-Z])(?=.*\d)(?=.*[#$%&]).{10,}$/.test(clave.value)) {
+      clave.classList.add('error'); hayError = true;
+    }
+    var msg = document.getElementById('mensaje');
+    if (hayError) {
+      msg.style.color = '#ff9999';
+      msg.textContent = 'ERR_VALIDATION_0x8F: fallo en validación de input.';
+      return;
+    }
+    trabajar(3000);
+    msg.style.color = '#c8e6c9';
+    msg.textContent = 'HTTP 200 OK - payload persistido.';
+  }
+
+  function eliminarCuenta() {
+    document.getElementById('formulario').reset();
+    document.getElementById('mensaje').style.color = '#ccc';
+    document.getElementById('mensaje').textContent = 'Cuenta eliminada.';
+  }
+
+  function abrirModal() { document.getElementById('modal').style.display = 'flex'; }
+  function cerrarModal() { document.getElementById('modal').style.display = 'none'; }
+
+  // Quitar pantalla de carga
+  window.addEventListener('load', function () {
+    setTimeout(function () {
+      document.getElementById('precarga').remove();
+    }, 1500);
+  });
+
+  // Aviso de cookies
+  setTimeout(function () {
+    document.getElementById('zona-cookies').innerHTML =
+      '<div style="background:#263238;color:#546e7a;padding:25px;font-size:12px">' +
+      'Usamos cookies para mejorar tu experiencia. Al seguir navegando aceptas todo. ' +
+      '<span style="color:#78909c;cursor:pointer" onclick="this.parentNode.remove()">OK</span></div>';
+  }, 2000);
+
+  // Imagen principal
+  setTimeout(function () {
+    document.getElementById('hero').innerHTML =
+      '<img src="https://picsum.photos/id/1015/4000/2600">' +
+      '<h1>Bienvenido a la tienda del futuro</h1>';
+  }, 3500);
+
+  // Banner promocional
+  setTimeout(function () {
+    document.getElementById('zona-promo').innerHTML =
+      '<div class="promo">🎁 CYBER WEEK: usa el cupón <b>MEGA70</b> 🎁</div>';
+  }, 4500);
+
+  // Publicidad intermedia
+  setTimeout(function () {
+    document.getElementById('zona-anuncio').innerHTML =
+      '<div style="height:250px;background:#fff3e0;display:flex;align-items:center;justify-content:center;color:#ffe0b2;font-size:30px">ANUNCIO</div>';
+  }, 6000);
+
+  // Newsletter
+  setTimeout(abrirModal, 8000);
+
+  // Testimonios rotativos
+  var testimonios = [
+    '"El mejor lugar para comprar" — Ana',
+    '"Llegó rapidísimo" — Luis',
+    '"Precios increíbles" — Carla',
+    '"Great service!!" — John'
+  ];
+  var t = 0;
+  setInterval(function () {
+    t = (t + 1) % testimonios.length;
+    document.getElementById('testimonios').textContent = testimonios[t];
+  }, 2000);
+
+  // Analítica
+  setInterval(function () { trabajar(150); }, 700);
+
+  // Productos relacionados
+  (function () {
+    var html = '';
+    for (var i = 0; i < 2500; i++) {
+      html += '<div><span>Producto relacionado #' + i + '</span><span> S/ ' + (i * 3) + '</span></div>';
+    }
+    document.getElementById('relleno').innerHTML = html;
+  })();
+
+  // Sesión
+  var segundos = 90;
+  setInterval(function () {
+    segundos--;
+    if (segundos <= 0) {
+      document.getElementById('formulario').reset();
+      segundos = 90;
+    }
+    document.getElementById('sesion').textContent = 'Sesión: ' + segundos + 's';
+  }, 1000);
+</script>
+
+</body>
+</html>
